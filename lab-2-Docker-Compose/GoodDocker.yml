@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  web:
+    image: nginx:stable
+    ports:
+      - "8080:80"
+    environment:
+      - ENV=${ENVIRONMENT}
+    volumes:
+      - ./app:/usr/share/nginx/html:ro
+    depends_on:
+      - db
+    networks:
+      - isolated
+
+  db:
+    image: postgres:14
+    environment:
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
+      - POSTGRES_DB=mydb
+    secrets:
+      - postgres_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      retries: 5
+    networks:
+      - isolated
+
+  cache:
+    image: redis:6-alpine
+    ports:
+      - "6378:6379"
+    networks:
+      - isolated
+
+volumes:
+  db_data:
+
+secrets:
+  postgres_password:
+    file: ./secrets/postgres_password
+
+networks:
+  isolated:
+    driver: bridge
+
