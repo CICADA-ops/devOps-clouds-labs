@@ -53,11 +53,12 @@ html секция:
 
 `sudo nginx -s reload`
 
-Пытаемся их проверить:
-`curl -k https://project1.com`
-`curl -k https://project1.com`
-(Должны получить содержание наших index.html)
-![_Приверка_curl_](./assets/2.png)
+Пытаемся проверить доступ + сразу чекаем алиасы:
+`curl -k -I https://project1.com/images/test_image.jpg`
+`curl -k -I https://project2.com/assets/test_asset.jpg`
+(Должны получить данные о наших подставных картиночках)
+![_Проверка_curl_](./assets/4.png)
+![_Приверка_alias_](./assets/2.png)
 
 Также пробуем в браузере:
 
