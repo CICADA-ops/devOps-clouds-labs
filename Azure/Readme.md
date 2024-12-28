@@ -71,7 +71,6 @@
 Как результат работы - заполненная [таблица](https://docs.google.com/spreadsheets/d/1cUJttPWT17DLtPpcYGmr76P0kqnDRL1ub9pbu-arQng/edit?usp=sharing)
 
 
-
 ![Результат](Assets/End.png)
 
 ## Вывод
